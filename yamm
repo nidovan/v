@@ -1,0 +1,30 @@
+bool isPrivate = true;
+
+string yammerGroupUrl = string.Format("{0}?name={1}&private={2}", 
+"https://www.yammer.com/api/v1/groups.json", "group name", isPrivate);
+
+PostRequest(yammerGroupUrl, accessToken);
+
+public string PostRequest(string requestUrl, string token)
+{
+       string jsonResponse = string.Empty;
+
+       HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUrl);
+       request.ContentType = "application/json; charset=utf-8";
+       request.Accept = "*/*";
+       request.Headers.Add("Authorization", "Bearer " + token);
+       request.AutomaticDecompression = DecompressionMethods.GZip;
+       request.Method = "POST";
+       request.ContentLength = 0;
+
+       HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+       using (Stream stream = response.GetResponseStream())
+       {
+          using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+          {
+             jsonResponse = reader.ReadToEnd();
+          }
+       }
+
+       return jsonResponse;
+}
