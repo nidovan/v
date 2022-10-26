@@ -28,3 +28,29 @@ public string PostRequest(string requestUrl, string token)
 
        return jsonResponse;
 }
+
+
+ public static string GetUserTokenByUserId(string UserID, string YammerDeveloperToken, string YammerClientID)
+        {
+            string EndPointURL = "https://www.yammer.com/api/v1/oauth.json?user_id=" + UserID.ToString() + "&consumer_key=" + YammerClientID;
+            try
+            {
+                string YammerMessageJson = null;
+                HttpWebRequest YammerRequest = HttpWebRequest.Create(EndPointURL) as HttpWebRequest;
+                YammerRequest.Method = "POST";
+                YammerRequest.ContentType = "application/json; odata=verbose";
+                YammerRequest.Accept = "application/json; odata=verbose";
+                YammerRequest.ContentLength = 0;
+                YammerRequest.Headers.Add("Authorization", string.Concat("Bearer ", YammerDeveloperToken));
+                using (HttpWebResponse response = YammerRequest.GetResponse() as HttpWebResponse)
+                {
+                    Encoding encode = Encoding.GetEncoding("utf-8");
+                    StreamReader reader = new StreamReader(response.GetResponseStream(), encode);
+                    YammerMessageJson = reader.ReadToEnd();
+                    //   YammerUserToken UserToken = JsonConvert.DeserializeObject<YammerUserToken>(YammerMessageJson);
+                    return YammerMessageJson;
+                }
+            }
+            catch (WebException ex)
+            { return null; }
+        }
