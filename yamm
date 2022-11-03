@@ -1,3 +1,23 @@
+https://login.microsoftonline.com/eb03eade-6d68-40a1-8996-bea179ff3137/oauth2/v2.0/authorize?client_id=b94109e1-362d-4a49-97c1-997544737fef&response_type=code&redirect_uri=http%3A%2F%2Flocalhost&response_mode=query&scope=https%3A%2F%2Fapi.yammer.com%2Fuser_impersonation&state=12346
+
+
+
+curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' ^
+https://login.microsoftonline.com/eb03eade-6d68-40a1-8996-bea179ff3137/oauth2/v2.0/token ^
+-d "grant_type=authorization_code" ^
+-d "code=" ^
+-d "scope=https%3A%2F%2Fapi.yammer.com%2Fuser_impersonation" ^
+-d "redirect_uri=http%3A%2F%2Flocalhost" ^
+-d "client_id=b94109e1-362d-4a49-97c1-997544737fef" ^
+-d "client_secret=" ^
+-d "state=12346"
+
+
+
+
+
+
+
 bool isPrivate = true;
 
 string yammerGroupUrl = string.Format("{0}?name={1}&private={2}", 
