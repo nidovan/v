@@ -1,0 +1,128 @@
+/**=========================
+    START Content Box 31
+=========================**/
+.content-box-31 {
+    display: flex;
+    align-items: center;
+    padding:30px;
+    background: #fff;
+    box-shadow: 0 10px 30px #dfdedf;
+    border-radius: 30px;
+    justify-content: space-between;
+    vertical-align: middle;
+    transition: all .5s;
+    margin-bottom: 30px;
+}
+.content-box-31-icon {
+    color: #fff;
+    background: #ddd;
+    padding: 12px;
+    font-size: 26px;
+    border-radius: 50%;
+    background:#6a4bc4;
+    box-shadow: 0 5px 30px 0 #6a4bc4ad;
+    display: inline-flex;
+    vertical-align: middle;
+    justify-content: center;
+    position: relative;
+    z-index: 0;
+}
+.content-box-31.color-2 .content-box-31-icon {
+    background: #54e0c4;
+    box-shadow: 0 5px 30px 0 #54e0c48a;
+}
+.content-box-31.color-3 .content-box-31-icon {
+    background: #ffb507;
+    box-shadow: 0 5px 30px 0 #ffb5086b;
+}
+.content-box-31.color-2 .content-box-31-icon{
+    background: #54e0c4;
+}
+.content-box-31.color-3 .content-box-31-icon{
+    background: #ffb508;
+}
+.content-box-31-title {
+    margin-top: 0;
+}
+.content-box-31-button {
+    text-decoration: none;
+    color: #6c6d72;
+    font-size: 26px;
+    border-radius: 5px;
+    padding:0px 2px;
+    transition: .3s;
+}
+.content-box-31-button i {
+    display: block;
+}
+.content-box-31:hover {
+    transform: translateY(-15px);
+}
+.content-box-31-button:hover {
+    background: #6a4bc4;
+    color: #fff;
+}
+.content-box-31.color-2 .content-box-31-button:hover{
+    background: #54e0c4;
+}
+.content-box-31.color-3 .content-box-31-button:hover{
+    background: #ffb508;
+}
+/**=========================
+    END Content Box 31
+=========================**/
+
+
+
+
+<div class="row">
+                <div class="col-md-4">
+                    <!-- Start Content Box -->
+                    <div class="content-box-31">
+                        <div class="content-box-31-icon-wrapper">
+                            <span class="content-box-31-icon">
+                                <i class="icon_check"></i>
+                            </span>
+                        </div>
+                        <div class="content-box-31-content-wrapper">
+                            <h3 class="content-box-31-title">Business Stratagy</h3>
+                            <span class="content-box-1-content">On Your Website </span>
+                        </div>
+                        <a class="content-box-31-button" href="#"> <i class="arrow_right"></i></a>
+                    </div>
+                    <!-- End Content Box -->
+                </div>
+                <div class="col-md-4">
+                    <!-- Start Content Box -->
+                    <div class="content-box-31 color-2">
+                        <div class="content-box-31-icon-wrapper">
+                            <span class="content-box-31-icon">
+                                <i class="icon_check"></i>
+                            </span>
+                        </div>
+                        <div class="content-box-31-content-wrapper">
+                            <h3 class="content-box-31-title">Website Development</h3>
+                            <span class="content-box-1-content">On Your Website </span>
+                        </div>
+                        <a class="content-box-31-button" href="#"> <i class="arrow_right"></i></a>
+                    </div>
+                    <!-- End Content Box -->
+                </div>
+                <div class="col-md-4">
+                    <!-- Start Content Box -->
+                    <div class="content-box-31 color-3">
+                        <div class="content-box-31-icon-wrapper">
+                            <span class="content-box-31-icon">
+                                <i class="icon_check"></i>
+                            </span>
+                        </div>
+                        <div class="content-box-31-content-wrapper">
+                            <h3 class="content-box-31-title">Creative services</h3>
+                            <span class="content-box-1-content">On Your Website </span>
+                        </div>
+                        <a class="content-box-31-button" href="#"> <i class="arrow_right"></i></a>
+                    </div>
+                    <!-- End Content Box -->
+                </div>
+            </div>
+
