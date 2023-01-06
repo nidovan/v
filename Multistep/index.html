@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>   
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Donation Form</title>
+
+	<!-- bootstrap css -->
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+	<!-- Font awesome 6 -->
+	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+
+	<!-- custom styles -->
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/animation.css">
+
+	<!--<link rel="stylesheet" type="text/css" href="assets/css/style_donation.css"> -->
+</head>
+<body>
+	
+	<div style="overflow: clip;">
+
+		<!-- step-1 -->
+
+		<form id="steps" class="show-section" method="post" enctype="multipart/form-data">
+			<section class="steps row">
+				<!-- step-1-sidebar -->
+				<div class="tab-sm-100 sidebar col-lg-3 col-md-4" >
+
+					<div class="sidebar-inner">
+						</div>
+
+					
+				</div>
+				<div class="step-1 tab-sm-100 col-lg-9 col-md-8">
+					<div class="step-inner">
+						<div class="wrapper">
+							<div class="step-heading">
+								<div class="heading-marker"></div>
+								<div class="heading">What kind of Services You Need?</div> 
+							</div>
+	
+							<!-- step-1 form-->
+							<div class="pop-right step-form" id="step1">
+								<div class="row justify-content-center">
+									<div class="tab-50 col-md-4">
+										<div class="radio-field">
+											<div class="icon">
+												<img src="assets/images/service_icons/service-1.png" alt="service 1">
+											</div>
+											<div class="service-text">
+												New<br/>Community
+											</div>
+											<input class="gradiant_border"  type="radio" name="services" checked value="corporate service">
+										</div>
+									</div>
+									<div class="tab-50 col-md-4">
+										<div class="radio-field">
+											<div class="icon">
+												<img src="assets/images/service_icons/service-2.png" alt="service 2">
+											</div>
+											<div class="service-text">
+												Edit <br/>Community
+											</div>
+											<input class="gradiant_border"  type="radio" name="services" value="freelancing services">
+										</div>
+									</div>
+									
+								
+
+									<!--<div class="tab-50 col-md-4">
+										<div class="radio-field">
+											<div class="icon">
+												<img src="assets/images/service_icons/service-3.png" alt="service 3">
+											</div>
+											<div class="service-text">
+												Development
+											</div>
+											<input class="gradiant_border" type="radio" name="services" value="development">
+										</div>
+									</div> -->
+								</div>
+							</div>
+	
+							<!-- next button-->
+							<div class="next-prev-btn">
+								<button type="button" id="step1btn" class="next">next step</button>
+							</div>
+							
+						</div>
+					</div>
+					<div class="steps-counter">
+						<span>Step: 1/5</span>
+						<div class="step-counter-inner">
+							<div class="a0 step-move"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+	
+			<!-- step-2 -->
+			<section class="steps row">
+				<!-- step-2-sidebar -->
+				<div class="tab-sm-100 sidebar col-lg-3 col-md-4" >
+					<div class="sidebar-inner">
+						<div class="sidebar-list">
+							<div class="list-heading">
+								New Yammer Community
+							</div>
+							<div class="list-text">
+								Communities in Yammer serve the needs of knowledge-sharing, employee experience, company-wide communications, and leadership engagement by providing a central place for your conversations, files, events, and updates.
+							</div>
+							 <ul class="listing">
+								<li><i class="fa-solid fa-check"></i>Join communities to stay informed</li>
+								<li><i class="fa-solid fa-check"></i>Like, reply to, and share messages</li>
+								<li><i class="fa-solid fa-check"></i>Connect with your peers</li>
+								<li><i class="fa-solid fa-check"></i>Gather ideas</li>
+							</ul> 
+						</div>
+					</div>
+				</div>
+				<div class="tab-sm-100 step-2 col-lg-9 col-md-8">
+					<div class="step-inner">
+						<div class="wrapper">
+							<!-- <div class="step-heading">
+								<div class="heading-marker"></div>
+								<div class="heading">New Yammer Community</div> 
+							</div>
+							<div class="step-text">
+								Communities in Yammer serve the needs of knowledge-sharing, employee experience, company-wide communications, and leadership engagement by providing a central place for your conversations, files, events, and updates.
+							</div>
+					    	-->
+							<!-- step-2-form -->
+							<div class="pop-right step-form" id="step2">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-part">
+											<div class="sub-heading">
+												<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+												<div class="sub-heading-text">Community Title</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="selection-field">
+														<input type="text" oninput='document.getElementById("Community-Url").innerHTML = this.value' name="title" id="comm-title" placeholder="" >
+													</div>
+												</div>
+												<div class="col-md-12">
+													<span>https://website.com/</span><span id="Community-Url"></span>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-part">
+											<div class="sub-heading">
+												<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+												<div class="sub-heading-text">Select a division</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="selection-field">
+														<select name="Division" id="Division">
+															<option class="">-- Select</option>
+															<option value="IT">IT</option>
+															<option value="HR">HR</option>
+														</select>
+														<span></span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								
+							
+
+
+									
+								</div>
+							</div>
+	
+							<!-- next previous button -->
+							<div class="next-prev-btn">
+								<button type="button" class="prev">previous</button>
+								<p>2/4 <span>Devices</span></p>
+								<button type="button" id="step2btn" class="next">next step</button>
+								
+							</div>
+						</div>
+					</div>
+	
+					<!-- steps counter -->
+					<div class="steps-counter">
+						<span>Step: 2/5</span>
+						<div class="step-counter-inner">
+							<div class="a20 step-move"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+	
+	
+			<!-- step-3 -->
+			<section class="steps row">
+	
+				<!-- step-3-sidebar -->
+				<div class="tab-sm-100 sidebar col-lg-3 col-md-4">
+					<div class="sidebar-inner">
+						<div class="sidebar-list">
+							<div class="list-heading">
+								New Yammer Community
+							</div>
+							<div class="list-text">
+								Communities in Yammer serve the needs of knowledge-sharing, employee experience, company-wide communications, and leadership engagement by providing a central place for your conversations, files, events, and updates.
+							</div>
+							 <ul class="listing">
+								<li><i class="fa-solid fa-check"></i>Join communities to stay informed</li>
+								<li><i class="fa-solid fa-check"></i>Like, reply to, and share messages</li>
+								<li><i class="fa-solid fa-check"></i>Connect with your peers</li>
+								<li><i class="fa-solid fa-check"></i>Gather ideas</li>
+							</ul> 
+						</div>
+						
+					</div>
+				</div>
+				<div class="tab-sm-100 step-3 col-lg-9 col-md-8">
+					<div class="step-inner">
+						<div class="wrapper">
+							
+
+
+						
+
+							<!-- step-3-form -->
+							<div class="pop-right step-form" id="step3">
+							  <div class="row">
+								<div class="col-md-6">
+								 <!-- <div class="form-part">
+									<div class="sub-heading">
+										<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+										<div class="sub-heading-text">Poprpose</div>
+									</div>
+									
+								     
+									  <div class="text-radio-field">
+										<label class="radio-text">Department</label>
+										<input class="gradiant_border" type="radio" name="text-radio" value="Department" checked>
+									  </div>
+									  <div class="text-radio-field">
+										<label class="radio-text">Project</label>
+										<input class="gradiant_border" type="radio" name="text-radio"  value="Project">
+									  </div>
+								 </div> -->
+								 <div class="form-part">
+									<div class="sub-heading">
+										<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+										<div class="sub-heading-text">Purpose</div>
+									</div>
+									<div class="row">
+										<div class="tab-50 col-md-6">
+											<div class="check-block">
+												<input class="gradiant_border unique-checkbox" type="checkbox" name="select-purpose"  value="Department">
+												<div class="skill-img">
+													<!-- <img src="assets/images/Team.gif" style="width:80px" alt=""> -->
+													<img src="assets/images/building.gif" style="width:80px" alt="">
+												</div>
+												<div class="skill-label">
+													<label>Department</label>
+												</div>
+											</div>
+										</div>
+										<div class="tab-50 col-md-6">
+											<div class="check-block">
+												<input class="gradiant_border unique-checkbox" type="checkbox" name="select-purpose" value="Project">
+												<div class="skill-img">
+													<img src="assets/images/lab.gif" style="width:80px"  alt="">
+													<!-- <lord-icon
+													src="https://cdn.lordicon.com/cowtkyiz.json"
+													trigger="hover"
+													style="width:100px;height:100px">
+												</lord-icon> -->
+
+													<!-- <img src="assets/images/public.png" style="width:55px"  alt=""> -->
+												</div>
+												<div class="skill-label">
+													<label>Project</label>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+
+								</div>
+								<!-- <div class="col-md-1"></div> -->
+                                <div class="col-md-6">
+
+									<div class="form-part">
+										<div class="sub-heading">
+											<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+											<div class="sub-heading-text">Privacy</div>
+										</div>
+										<div class="row">
+											<div class="tab-50 col-md-6">
+												<div class="check-block">
+													<input class="gradiant_border unique-checkbox" type="checkbox" name="select-privacy"  value="Private">
+													<div class="skill-img">
+														<img src="assets/images/window-shutters.gif" style="width:80px"  alt="">
+														<!-- <img src="assets/images/cadna.png" style="width:40px" alt=""> -->
+													</div>
+													<div class="skill-label">
+														<label>Private</label>
+													</div>
+												</div>
+											</div>
+											<div class="tab-50 col-md-6">
+												<div class="check-block">
+													<input class="gradiant_border unique-checkbox" type="checkbox" name="select-privacy" value="Public">
+													<div class="skill-img">
+														<img src="assets/images/Team.gif" style="width:80px"  alt="">
+														<!-- <lord-icon
+                                                         src="https://cdn.lordicon.com/oqhlhtfq.json"
+                                                         trigger="hover"
+                                                         style="width:100px;height:100px">
+                                                        </lord-icon> -->
+														<!-- <img src="assets/images/public.png" style="width:55px"  alt=""> -->
+													</div>
+													<div class="skill-label">
+														<label>Public</label>
+													</div>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+
+									 
+
+								</div>
+
+
+							  </div>
+								
+                            <div class="row">
+								
+								
+							</div>
+
+
+                               <!-- 
+								<div class="form-part">
+									<div class="sub-heading">
+										<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+										<div class="sub-heading-text">Select if your community would contain MNPI</div>
+									</div>
+									<div class="row">
+										<div class="tab-50 col-md-4">
+											<div class="check-block">
+												<input class="gradiant_border" type="checkbox" name="select-skill"  value="MNPI">
+												<div class="skill-img">
+													<img src="assets/images/cadna.png" style="width:40px" alt="">
+												</div>
+												<div class="skill-label">
+													<label>Yes</label>
+												</div>
+											</div>
+										</div>
+										<div class="tab-50 col-md-4">
+											<div class="check-block">
+												<input class="gradiant_border" type="checkbox" name="select-skill" value="WordPress PHP Developer">
+												<div class="skill-img">
+													<img src="assets/images/skills/wordpress.png" alt="">
+												</div>
+												<div class="skill-label">
+													<label>WordPress PHP Developer</label>
+												</div>
+											</div>
+										</div>
+										<div class="tab-50 col-md-4">
+											<div class="check-block">
+												<input class="gradiant_border" type="checkbox" name="select-skill" value="SEO &  Digital Marketing">
+												<div class="skill-img">
+													<img src="assets/images/skills/seo.png" alt="">
+												</div>
+												<div class="skill-label">
+													<label>SEO &  Digital Marketing</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="sub-heading">
+									<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+									<div class="sub-heading-text">Write Your Words</div>
+								</div>
+								<textarea name="textarea" required id="textarea"></textarea>
+                                -->
+
+							</div>
+	
+							<!-- next previous button -->
+							<div class="next-prev-btn">
+								<button type="button" class="prev">previous</button>
+								<p>3/4 <span>Devices</span></p>
+								<button type="button" id="step3btn" class="next">next step</button>
+								
+							</div>
+						</div>
+					</div>
+	
+					<!-- steps counter -->
+					<div class="steps-counter">
+						<span>Step: 3/5</span>
+						<div class="step-counter-inner">
+							<div class="a40 step-move"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+	
+	
+			<!-- step-4 -->
+			<section class="steps row">
+	
+				<!-- step-4-sidebar -->
+				<div class="tab-sm-100 sidebar col-lg-3 col-md-4" >
+					<div class="sidebar-inner">
+						<div class="sidebar-list">
+							<div class="list-heading">
+								New Yammer Community
+							</div>
+							<div class="list-text">
+								Communities in Yammer serve the needs of knowledge-sharing, employee experience, company-wide communications, and leadership engagement by providing a central place for your conversations, files, events, and updates.
+							</div>
+							 <ul class="listing">
+								<li><i class="fa-solid fa-check"></i>Join communities to stay informed</li>
+								<li><i class="fa-solid fa-check"></i>Like, reply to, and share messages</li>
+								<li><i class="fa-solid fa-check"></i>Connect with your peers</li>
+								<li><i class="fa-solid fa-check"></i>Gather ideas</li>
+							</ul> 
+						</div>
+					</div>
+				</div>
+				<div class="tab-sm-100 step-4 col-lg-9 col-md-8">
+					<div class="step-inner">
+						<div class="wrapper">
+
+
+							
+
+							<!-- <article>
+								<div class="step-heading">
+									<div class="heading-marker"></div>
+									<h2 class="heading">How Do you Watch your Favoite Shoes?</h2> 
+								</div>
+								<div class="step-text">
+									I see great value in using collabrative tools to make my work more effective and efficient. 
+								</div>
+							</article> -->
+	
+							<!-- step-4-form -->
+							<div class="pop-right step-form" id="step4">
+								<div class="form-part">
+								  <div class="sub-heading">
+									<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+									<div class="sub-heading-text">select whichever is applicable</div>
+								  </div>
+									<div class="row">
+										<div class="col-md-6">
+												<div class="text-radio-field">
+													<label class="radio-text">GRN</label>
+													<input class="gradiant_border" type="radio" name="text-radio2" value="GRN" checked>
+												</div>
+												<div class="text-radio-field">
+													<label class="radio-text">Cost Center</label>
+													<input class="gradiant_border" type="radio" name="text-radio2"  value="CostCenter">
+												</div>
+												
+											 
+
+											<!-- <div class="selection-field">
+												<select name="hire" id="hire" required>
+													<option value="">-- Select</option>
+													<option value="full">Full Time Job</option>
+													<option value="Freelance">Freelancer</option>
+													<option value="part-time">Part Time Job</option>
+												</select>
+												<span></span>
+											</div> -->
+										</div>
+										<div class="col-md-6">
+
+											<div class="selection-field">
+												<input type="text" name="title" id="comm-title" placeholder="" >
+											</div>
+											
+											<!-- <div class="selection-field">
+												<select name="hire2" id="hire2" required>
+													<option value="">-- Select</option>
+													<option value="Freelance">Freelance/Project</option>
+													<option value="office">Office Based</option>
+												</select>
+												<span></span>
+											</div> -->
+										</div>
+									</div>
+								</div> 
+								<div class="form-part">
+									<div class="sub-heading">
+									  <div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+									  <div class="sub-heading-text">Select Community Owners</div>
+									</div>
+									<div class="row">
+										  <div class="col-md-12">
+											  <div class="selection-field">
+												  <input type="text" name="Owners" id="owners" placeholder="" >
+											  </div>
+										  </div>
+									  </div>
+								  </div> 
+							</div>
+	
+							<!-- next previous button -->
+							<div class="next-prev-btn">
+								<button type="button" class="prev">previous</button>
+								<p>4/5 <span>Devices</span></p>
+								<button type="button" id="step4btn" class="next">next step</button>
+								
+							</div>
+						</div>
+					</div>
+	
+					<!-- steps counter -->
+					<div class="steps-counter">
+						<span>Step: 4/5</span>
+						<div class="step-counter-inner">
+							<div class="a60 step-move"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+	
+			<!-- Step 5-->
+			<section class="steps row">
+	
+				<!-- step-5-sidebar -->
+				<div class="tab-sm-100 sidebar col-lg-3 col-md-4" >
+					<div class="sidebar-inner">
+						<div class="sidebar-list">
+							<div class="list-heading">
+								New Yammer Community
+							</div>
+							<div class="list-text">
+								Communities in Yammer serve the needs of knowledge-sharing, employee experience, company-wide communications, and leadership engagement by providing a central place for your conversations, files, events, and updates.
+							</div>
+							 <ul class="listing">
+								<li><i class="fa-solid fa-check"></i>Join communities to stay informed</li>
+								<li><i class="fa-solid fa-check"></i>Like, reply to, and share messages</li>
+								<li><i class="fa-solid fa-check"></i>Connect with your peers</li>
+								<li><i class="fa-solid fa-check"></i>Gather ideas</li>
+							</ul> 
+						</div>
+					</div>
+				</div>
+				<div class="tab-sm-100 step-5 col-lg-9 col-md-8">
+					<div class="step-inner">
+						<div class="wrapper">
+							<!-- <article>
+								<div class="step-heading">
+									<div class="heading-marker"></div>
+									<h2 class="heading">What do you think of this  feedback is important</h2> 
+								</div>
+								<div class="step-text">
+									I see great value in using collabrative tools to make my work more effective and efficient. 
+								</div>
+							</article> -->
+	
+							<!-- step-5-form -->
+							<div class="pop-right step-form" id="step5">
+								
+								
+										
+										<div class="form-part">
+											<div class="sub-heading">
+												<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+												<div class="sub-heading-text">Select if your community contain MNPI</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="selection-field">
+														<select name="MNPI" id="MNPI">
+															<option class="">-- Select</option>
+															<option value="Yes">Yes</option>
+															<option value="No">No</option>
+														</select>
+														<span></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-part">
+											<div class="sub-heading">
+												<div class="sub-heading-marker"><i class="fa-solid fa-star-of-life"></i></div>
+												<div class="sub-heading-text">Select if your community contain PII</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="selection-field">
+														<select name="PII" id="PII">
+															<option class="">-- Select</option>
+															<option value="Yes">Yes</option>
+															<option value="No">No</option>
+														</select>
+														<span></span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									
+								
+								
+							</div>
+	
+							<!-- next previous button -->
+							<div class="next-prev-btn">
+								<button type="button" class="prev">previous</button>
+								<p>5/5 <span>Devices</span></p>
+								<button type="button" class="apply" id="sub">Submit</button>
+								
+							</div>
+						</div>
+					</div>
+	
+					<!-- steps counter -->
+					<div class="steps-counter">
+						<span>Step: 5/5</span>
+						<div class="step-counter-inner">
+							<div class="a80 step-move"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</form>
+
+		
+	</div>
+
+	<div id="error"></div>
+	<!-- bootstrap JS -->
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<!-- Jquery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<!-- custom JS -->
+	<script src="assets/js/custom.js"></script>
+
+
+	<script src="https://cdn.lordicon.com/fudrjiwc.js"></script>
+
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.1/lottie.min.js"></script> -->
+
+</body>
+</html>

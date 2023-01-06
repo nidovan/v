@@ -1,0 +1,763 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body
+{
+    font-family: 'jost';
+    min-height: 100vh;
+    height: auto;
+    width: 100%;
+}
+main
+{
+    position: relative;
+}
+.sidebar
+{
+    background-image: url(../images/sidebar-bg.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: relative;
+}
+.sidebar .wrapper
+{
+    padding: 45px 40px;
+    height: 100%;
+}
+.logo
+{
+    display: flex;
+    align-items: center;
+}
+.logo .logo-icon
+{
+    font-size: 30px;
+    color: rgb(41, 164, 202);
+}
+.logo .logo-text
+{
+
+    font-size: 33px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;  
+    margin-left: 10px;
+}
+.sidebar-inner
+{
+    color: white;
+    display: grid;
+    height: calc(100% - 70px);
+    align-content: center;
+    margin: 0 auto;
+    width: 78%;
+}
+.sidebar-inner span
+{
+    font-size: 15px;
+    color: rgb(41, 164, 202);
+    text-transform: uppercase;
+    line-height: 3.667;
+}
+.sidebar-inner h2
+{
+    font-size: 55px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    line-height: 1;
+    text-transform: capitalize;
+}
+.sidebar-inner p
+{
+    font-size: 18px;
+    color: rgb(215, 215, 215);
+    line-height: 1.556; 
+}
+.donation-meter
+{
+    margin-top: 50px;
+    width: 100%;
+    height: auto;
+}
+.donation-meter h5, .donation-meter span
+{
+    font-size: 35px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    line-height: 1.857;
+}
+.donation-meter-inner
+{
+    width: 100%;
+    height: 19px;
+    z-index: 3;
+	margin-top: 5px;
+    border-radius: 9px;
+    background-color: rgb(60, 63, 63);
+    display: flex;
+}
+.meter-fixed
+{
+    width: 50%;
+    height: 100%;
+    background-color: rgb(41, 164, 202);
+    border-radius: inherit;
+}
+.meter-circle
+{
+	background: #fff;
+	height: 45px;
+	width: 45px;
+    border: 0;
+    border-top: solid 4px rgb(41, 164, 202);
+	border-radius: 50%;
+    background-image: url(../images/thumb-img.png);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    top: 120%;
+    margin-left: -25px;
+}
+.donation-meter input[type=range]
+{
+	-webkit-appearance: none;
+    width: 100%;
+    height: 19px;
+    z-index: 3;
+	margin-top: 5px;
+	cursor: pointer;
+    border-radius: 9px;
+    background-color: rgb(60, 63, 63);
+      
+}
+
+.donation-meter input[type=range]:active
+{
+	border: none;
+	box-shadow: none;
+}
+.donation-meter input[type=range]:focus
+{
+	border: none;
+	box-shadow: none;
+}
+.donation-meter input[type=range]::-webkit-slider-thumb
+{
+	-webkit-appearance: none;
+	background: #fff;
+	height: 45px;
+	width: 45px;
+	cursor: grab;
+    border: 0;
+    border-top: solid 4px rgb(41, 164, 202);
+	border-radius: 50%;
+    background-image: url(../images/thumb-img.png);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    top: 35px;
+
+
+}
+.donation-meter input[type=range]::-moz-range-thumb
+{
+	-webkit-appearance: none;
+	background: #fff;
+	height: 45px;
+	width: 45px;
+	cursor: grab;
+    border: 0;
+    border-top: solid 4px rgb(41, 164, 202);
+	border-radius: 50%;
+    background-image: url(../images/thumb-img.png);
+    background-size: cover;
+    background-position: center;
+
+}
+.donation-meter input[type=range]::-ms-thumb
+{
+	-webkit-appearance: none;
+	background: #fff;
+	height: 45px;
+	width: 45px;
+	cursor: grab;
+    border: 0;
+    border-top: solid 4px rgb(41, 164, 202);
+	border-radius: 50%;
+    background-image: url(../images/thumb-img.png);
+    background-size: cover;
+    background-position: center;
+
+}
+.donation-meter input[type=range]::-webkit-slider-runnable-track
+{
+    border-radius: 9px;
+}
+.donation-meter input[type=range]::-moz-range-track
+{
+    border-radius: 9px;
+}
+.donation-meter input[type=range]::-ms-track
+{
+    border-radius: 9px;
+}
+.raised
+{
+    display: flex;
+    justify-content: space-between;
+}
+.raised p, .raised span
+{
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    line-height: 0;
+    margin-top: 15px;
+      
+}
+.raised span
+{
+    color: rgb(41, 164, 202);
+}
+.copyright
+{
+    display: flex;
+    height: auto;
+    width: 100%;
+    justify-content: space-between;
+    margin: 0 20px;
+    margin-top: 20px;
+}
+.copyright .copyright-text
+{
+    font-size: 13.5px;
+    color: rgb(166, 166, 166);
+}
+.copyright .copyright-icons i
+{
+    margin: 0 20px;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+}
+.background
+{
+    background-image: url(../images/background/bg.jpg);
+    background-size: cover;
+
+}
+.steps
+{
+    min-height: 100vh;
+    width: 100%;
+    /* background-color: rgb(83, 129, 129); */
+}
+#steps
+{
+    margin-bottom: 30px;
+}
+
+.steps .wrapper
+{
+    display: grid;
+    align-content: center;
+    min-height: 100vh;
+    margin-right: auto;
+    padding-left: 100px;
+    width: 80%;
+}
+.step-inner
+{
+    height: 100%;
+}
+.step-inner span
+{
+    font-size: 14px;
+    color: rgb(166, 166, 166);
+    line-height: 2;  
+}
+.step-inner h2
+{
+    font-size: 45px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    line-height: 1.444;
+    text-transform: capitalize;
+}
+.step-inner p
+{
+    font-size: 22px;
+    color: rgb(16, 26, 37);
+}
+.donation-form
+{
+    margin-top: 55px;
+}
+.radio-field
+{
+    display: flex;
+    height: 133px;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+    position: relative;
+      
+}
+.radio-field input[type=radio]
+{
+    -webkit-appearance: none;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border: solid 5px rgb(233, 233, 233);
+    border-radius: 6px;
+    padding: 35px;
+    transition: 0.5s all ease;
+}
+.radio-field input[type=radio]::before
+{
+    display: block;
+    content: "";
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    max-width: 60px;
+    transition: 0.1s all linear;
+    height: 60px;
+}
+.radio-field .op-1::before
+{
+    background-image: url(../images/donate-cause-icon-1.png);
+}
+.radio-field .op-2::before
+{
+    background-image: url(../images/donate-cause-icon-2.png) !important;
+}
+.radio-field .op-3::before
+{
+    background-image: url(../images/donate-cause-icon-3.png) !important;
+}
+.radio-field .op-4::before
+{
+    background-image: url(../images/donate-cause-icon-4.png) !important;
+}
+.radio-field label
+{
+    font-size: 26px;
+    color: rgb(37, 50, 98);
+    font-weight: bold;
+    margin-left: 30px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: 45px;
+}
+
+.radio-field input[type=radio]:checked
+{
+    border-color: rgb(41, 164, 202);
+}
+.radio-field input[type=radio]:checked::before
+{
+    filter: brightness(0) saturate(100%) invert(56%) sepia(99%) saturate(376%) hue-rotate(150deg) brightness(83%) contrast(89%);filter: brightness(0) saturate(100%) invert(56%) sepia(99%) saturate(376%) hue-rotate(150deg) brightness(83%) contrast(89%);
+}
+.next-prev-btn
+{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.next-prev-btn button
+{
+    background-color: rgb(41, 164, 202);
+    width: 200px;
+    height: 69px;
+    border-radius: 50px;
+    border: 0;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;   
+}
+.next-prev-btn .prev
+{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 59px 0px rgba(0, 0, 0, 0.24);
+    color: rgb(19, 21, 21);
+    margin-right: 20px;
+}
+.select-field
+{
+    margin-bottom: 40px;
+}
+.select-field label
+{
+    font-size: 14px;
+    color: rgb(166, 166, 166);
+    display: block;
+    margin-bottom: 15px;
+}
+.select-field input[type=radio]
+{
+    -webkit-appearance: none;
+    border: solid 2px rgb(37, 50, 98);
+    width: 103px;
+    height: 80px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: 0.5s all ease;
+    position: relative;
+}
+.select-field input[type=radio]::before
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 80px;
+    position: absolute;
+    text-align: center;
+    font-size: 22.5px;
+    color: rgb(37, 50, 98);
+    transition: 0.5s all ease;
+    font-weight: bold;
+      
+}
+.select-field .op-1::before
+{
+    content: "$1";
+}
+.select-field .op-2::before
+{
+    content: "$15";
+}
+.select-field .op-3::before
+{
+    content: "$20";
+}
+.select-field .op-4::before
+{
+    content: "$50";
+}
+.select-field input[type=radio]:checked
+{
+    border-color: rgb(41, 164, 202);
+}
+.select-field input[type=radio]:checked::before
+{
+    color: rgb(41, 164, 202);
+}
+.select-field .text-w-icon-field
+{
+    border-radius: 50px;
+    border: solid 2px rgb(37,50,98);
+    width: 250px;
+    height: 80px;
+    overflow: hidden;
+    display: flex;
+    transition: 0.3s all ease;
+
+}
+.select-field .text-w-icon-field label
+{
+    outline: solid 2px rgb(37, 50, 98);
+    width: 87px;
+    height: inherit;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 22.5px;
+    color: rgb(37, 50, 98);
+    font-weight: bold;
+    transform: 0.3s all ease;
+      
+}
+  
+.select-field .text-w-icon-field input[type=text]
+{
+    height: 100%;
+    background: transparent;
+    border: 0;
+    padding-left: 30px;
+    padding-right: 20px;
+    font-size: 22.5px;
+    width: calc(100% - 87px);
+    color: rgb(37, 50, 98);
+    font-weight: bold;
+    transform: 0.3s all ease;
+      
+}
+#active.focused
+{
+    border-color: rgb(41, 164, 202) !important;
+}
+#active.focused label
+{
+    outline-color: rgb(41, 164, 202) !important; 
+    color: rgb(41, 164, 202) !important; 
+}
+#active.focused input[type=text]
+{
+    color:  rgb(41, 164, 202) !important;
+}
+.select-field .text-w-icon-field input[type=text]:focus
+{
+    outline: none;
+}
+.text-field
+{
+    width: 100%;
+    height: 110px;
+    margin-bottom: 25px;
+    position: relative;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.text-field input, .text-field select
+{
+    border: solid 2px rgb(243, 243, 243);
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 70px;
+    border-radius: 50px;
+    padding-left: 35px;
+    transition: 0.3s all ease;
+    font-size: 16px;
+    font-family: "Roboto";
+    color: rgb(189, 189, 189);
+      
+}
+.text-field select
+{
+    -webkit-appearance: none;
+    position: relative;
+    cursor: pointer;
+}
+.text-field select+span::before
+{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f063";
+    color: rgb(27, 25, 25);
+    font-size: 17px;
+    top: 55%;
+    right: 30px;
+    position: absolute;
+    z-index: 0;
+}
+.text-field input:focus, .text-field select:focus
+{
+    outline: none;
+}
+.text-field label
+{
+    font-size: 18px;
+    color: rgb(47, 49, 70);
+    margin-bottom: 10px;
+    margin-left: 35px;
+    height: 30px;
+    line-height: 30px;
+    transition: 0.3s all ease;
+    z-index: 999;
+}
+.text-field label i
+{
+    display: none;
+}
+.focus.focused label
+{
+    background-color: rgb(41, 164, 202);
+    color: #fff;
+    font-weight: 500;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 0 15px;
+    position: relative;
+    top: 27px;
+}
+.focus.focused label i
+{
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 5px;
+}
+.focus.focused input, .focus.focused select
+{
+    border: solid 2px rgb(41, 164, 202);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 59px 0px rgba(0, 0, 0, 0.24);
+      
+}
+.donate-button
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.donate-button button
+{
+    background-color: rgb(41, 164, 202);
+    width: 273px;
+    height: 69px;
+    border: 0;
+    border-radius: 50px;
+    font-size: 11px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+.donate-button .custom
+{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 59px 0px rgba(0, 0, 0, 0.24);
+    width: 330px;
+    color: rgb(19, 21, 21);
+}
+.donate-button .custom span
+{
+    margin-left: 15px;
+    color:  rgb(41, 164, 202);
+}
+.donate-button .custom span i
+{
+    margin-right: 8px;
+}
+
+/*thankyou-page*/
+
+.thankyou-page
+{
+  background-color: rgb(243, 247, 254);
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.thankyou-page-inner
+{
+	background: rgb(255,255,255);
+  border-radius: 90px;
+  width: 100%;
+  position: relative;
+  top: 30%;
+  /*transform: translateY(50%);*/
+	text-align: center;
+}
+.tick
+{
+	position: relative;
+}
+.done-tick
+{
+	width: 120px;
+	height: 120px;
+	border: solid 1px transparent;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-left-color: rgb(34,208,136);
+  animation: rotate-circle 0.5s linear forwards;
+  animation-delay: 0.5s;
+	border-radius: 50%;
+	background-color: transparent;
+}
+
+
+.tick i
+{
+	font-weight: 900;
+	font-size: 50px;
+	color: rgb(34,208,136);
+  position: absolute;
+  animation: tick-icon 0.8s linear forwards;
+  animation-delay: 0.5s;
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  animation-delay: 0.5s;
+}
+
+.thankyou-page-inner h2
+{
+  font-size: 45px;
+  color: rgb(5, 17, 51);
+  margin-top: 20px;
+  font-weight: bold;
+}
+.thankyou-page-inner p
+{
+
+  font-size: 16px;
+  color: rgb(170, 170, 170);
+  margin-top: 20px;
+}
+
+.thankyou-page-inner .wrapper
+{
+	padding: 80px 290px;
+}
+.next-prev-btn .back
+{   
+    border: 0;
+    border-radius: 50px;
+    background-color: rgb(41, 164, 202);
+    font-size: 17px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 448px;
+    height: 67px;
+      
+  }
+  
+
+
+  
+
+
+
+
+
+#sub img
+{
+    width: 60px;
+}
+
+.highlight
+{
+    border-top: solid 3px var(--primary-color) !important;
+    border-bottom: solid 3px var(--primary-color) !important;
+
+}
+
+
+#error
+{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 20;
+}
+
+
+.invalid
+{
+  border: solid 2px #ff4444 !important;
+  position: relative;
+}
