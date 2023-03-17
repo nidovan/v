@@ -1,3 +1,51 @@
+
+
+public ActionResult GetCountries()
+{
+    using (var db = new CountriesDbContext())
+    {
+        var countries = db.Countries.ToList();
+        var countryList = countries.Select(c => new SelectListItem
+        {
+            Value = c.CountryId.ToString(),
+            Text = c.CountryName
+        });
+        return Json(countryList, JsonRequestBehavior.AllowGet);
+    }
+}
+In your view, create a dropdown list using the Html.DropDownListFor() helper method and bind it to the list of SelectListItem objects returned by the action method. For example, you can create a dropdown list of countries using the following code:
+less
+Copy code
+@Html.DropDownListFor(m => m.CountryId, new SelectList(""),
+    "-- Select Country --", new { @class = "form-control" })
+Finally, use jQuery to call the GetCountries() action method and populate the dropdown list with the data returned by the server. For example, you can use the following jQuery code to populate the dropdown list with the list of countries:
+javascript
+Copy code
+$(document).ready(function() {
+    $.ajax({
+        type: "GET",
+        url: "@Url.Action("GetCountries", "Home")",
+        dataType: "json",
+        success: function(data) {
+            $.each(data, function(index, item) {
+                $("#CountryId").append(
+                    $("<option>").text(item.Text).val(item.Value)
+                );
+            });
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
 Here's an example of how to implement server-side filtering with dropdowns in DataTables using ASP.NET MVC:
 
 Add the necessary JavaScript and CSS files for DataTables to your view:
