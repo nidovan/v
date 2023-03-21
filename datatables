@@ -1,4 +1,85 @@
 
+Initialize both tables with the DataTables plugin using the appropriate options. Make sure to set the responsive option to true for both tables so that they can adjust to the screen size.
+javascript
+Copy code
+
+
+// Initialize the master table
+$('#master-table').DataTable({
+  responsive: true,
+  // ... other options
+});
+
+// Initialize the detail table
+$('#detail-table').DataTable({
+  responsive: true,
+  // ... other options
+});
+
+
+Next, you need to set up a click event handler for the rows in the master table. When a row is clicked, you'll need to retrieve the data for that row and populate the detail table with it.
+javascript
+Copy code
+$('#master-table tbody').on('click', 'tr', function() {
+  // Get the data for the selected row
+  var data = $('#master-table').DataTable().row(this).data();
+  
+  // Populate the detail table with the selected row's data
+  $('#detail-table').DataTable().clear().draw();
+  $('#detail-table').DataTable().rows.add(data.details).draw();
+  
+  // Show the Bootstrap modal
+  $('#detail-modal').modal('show');
+});
+
+
+
+Finally, you need to create the Bootstrap modal HTML markup and initialize it with the modal plugin. Make sure to set the id attribute of the modal to detail-modal so that you can reference it in the click event handler.
+html
+Copy code
+
+
+<!-- Detail Modal -->
+<div class="modal fade" id="detail-modal" tabindex="-1" role="dialog" aria-labelledby="detail-modal-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detail-modal-label">Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Detail table -->
+        <table id="detail-table" class="table table-striped table-bordered" style="width:100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 public ActionResult GetCountries()
 {
