@@ -1,4 +1,62 @@
 
+Here's an example of how to show scrollX at the top and bottom of the table:
+
+First, add the following CSS to your stylesheet:
+css
+Copy code
+.dataTables_wrapper {
+  position: relative;
+}
+
+.dataTables_scrollBody {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-height: calc(100vh - 200px); /* adjust the height as needed */
+  scrollbar-width: none; /* hide the scrollbar */
+}
+
+.dataTables_scrollBody::-webkit-scrollbar {
+  display: none; /* hide the scrollbar for WebKit browsers */
+}
+
+.dataTables_scrollHeadInner, .dataTables_scrollFootInner {
+  padding-right: 0 !important;
+}
+
+.dataTables_scrollHead, .dataTables_scrollFoot {
+  overflow-x: hidden !important;
+  position: sticky;
+  z-index: 1;
+  background-color: white;
+  top: 0;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+Then, modify the HTML table by adding the data-scroll-y and data-scroll-x attributes:
+php
+Copy code
+<table id="example" class="display" style="width:100%" data-scroll-y="true" data-scroll-x="true">
+  <!-- table content here -->
+</table>
+The data-scroll-y="true" attribute enables vertical scrolling if the table exceeds its container height.
+
+Finally, use jQuery to initialize the DataTables table:
+php
+Copy code
+<script>
+$(document).ready(function() {
+  $('#example').DataTable();
+});
+</script>
+
+
+
+
+
+
+
+
+
+
 
 Using subtables:
 Datatables also provides the ability to create subtables, where a nested table is displayed beneath each row in the parent table. This approach requires more complex code, but can provide more advanced functionality.
