@@ -1,4 +1,56 @@
 
+
+Using subtables:
+Datatables also provides the ability to create subtables, where a nested table is displayed beneath each row in the parent table. This approach requires more complex code, but can provide more advanced functionality.
+
+Here's an example code snippet:
+
+javascript
+Copy code
+$(document).ready(function() {
+    var table = $('#myTable').DataTable( {
+        "ajax": "data.json",
+        "columns": [
+            { "data": "name" },
+            { "data": "position" },
+            { "data": "office" },
+            { "data": "salary" }
+        ]
+    });
+
+    $('#myTable tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    });
+});
+
+function format ( rowData ) {
+    var subtable = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+    // Build the HTML for the subtable
+    subtable += '</table>';
+
+    return subtable;
+}
+
+
+
+
+
+
+
+
+
 Initialize both tables with the DataTables plugin using the appropriate options. Make sure to set the responsive option to true for both tables so that they can adjust to the screen size.
 javascript
 Copy code
