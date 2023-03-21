@@ -1,4 +1,16 @@
 
+
+<script>
+$(document).ready(function() {
+  $('#example').DataTable({
+    scrollX: true,
+    dom: '<"top"i<"scroll-wrapper"t><"scroll-wrapper"p>><"bottom"i<"scroll-wrapper"t><"scroll-wrapper"p>>'
+  });
+});
+</script>
+
+
+
 Here's an example of how to show scrollX at the top and bottom of the table:
 
 First, add the following CSS to your stylesheet:
