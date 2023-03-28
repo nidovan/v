@@ -1,3 +1,43 @@
+// Set up LDAP connection
+string ldapPath = "LDAP://yourdomain.com";
+DirectoryEntry entry = new DirectoryEntry(ldapPath);
+DirectorySearcher searcher = new DirectorySearcher(entry);
+
+// Get current user's username
+string username = Environment.UserName;
+
+// Set LDAP search filter to find the user
+searcher.Filter = "(&(objectCategory=person)(objectClass=user)(sAMAccountName=" + username + "))";
+searcher.PropertiesToLoad.Add("memberOf");
+
+// Perform search and get results
+SearchResult result = searcher.FindOne();
+
+if (result != null)
+{
+    // Get user's groups
+    ResultPropertyValueCollection groups = result.Properties["memberOf"];
+
+    // Iterate over groups and output their names
+    foreach (string group in groups)
+    {
+        Console.WriteLine(group);
+    }
+}
+else
+{
+    Console.WriteLine("User not found.");
+}
+
+
+
+
+
+
+
+
+
+
 <?xml version="1.0" encoding="utf-8"?>
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
