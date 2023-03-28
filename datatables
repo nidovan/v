@@ -1,3 +1,16 @@
+$(document).ready(function() {
+    $('#myTable').DataTable( {
+        "columnDefs": [ {
+            "targets": 0, // first column
+            "render": function ( data, type, row ) {
+                return data + ' <i class="fa fa-pencil"></i>';
+            }
+        } ]
+    } );
+} );
+
+
+
 
 
 <script>
