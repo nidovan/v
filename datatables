@@ -1,3 +1,22 @@
+As you probably know, to onboard Y in prod we must integrate with various systems internally to meet :
+
+1. Authentication: In order to access the Y API, We would like to Enable application permissions in AAD. as of now we have only delegated permission
+
+2. Access to Feed Data:
+including messages, posts, comments, nested comments, likes, reaction, capture History (somone who edit/delete a comment or reaction):
+all meta data related to it such as the author, creation date, content type, and any attached media or files, source : created from mobile, desktop, teams
+
+To collect Y feed we need to implement multiple jobs on multiple servers for parallel processing. Each job would be responsible for processing a subset of communities or groups and their associated items.
+
+probably we need an api function to list all y communities, and another function to get all items associated to it with date range filter 
+
+
+3. Filtering Capabilities: API need to support filtering by criteria such as user, group, date range. 
+
+4. Y community creation
+
+5. Connect Y community to an existing Teams 
+ 
  // Parse the group name from the LDAP path
         string groupName = group.Substring(3, group.IndexOf(",") - 3);
 
