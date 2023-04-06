@@ -1,3 +1,159 @@
+import { createStore } from 'redux';
+
+const initialState = {
+  step: 1,
+  formData: {
+    field1: '',
+    field2: '',
+    field3: ''
+  }
+};
+
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'UPDATE_FIELD':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          [action.payload.field]: action.payload.value
+        }
+      };
+    case 'NEXT_STEP':
+      return {
+        ...state,
+        step: state.step + 1
+      };
+    case 'PREV_STEP':
+      return {
+        ...state,
+        step: state.step - 1
+      };
+    case 'SUBMIT_DATA':
+      // Call API with formData
+      return state;
+    default:
+      return state;
+  }
+}
+
+const store = createStore(reducer);
+
+
+
+
+
+Next, we'll define the components for each step:
+
+javascript
+Copy code
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+function Step1() {
+  const formData = useSelector(state => state.formData);
+  const dispatch = useDispatch();
+
+  function handleFieldChange(e) {
+    dispatch({
+      type: 'UPDATE_FIELD',
+      payload: {
+        field: 'field1',
+        value: e.target.value
+      }
+    });
+  }
+
+  return (
+    <div>
+      <h2>Step 1</h2>
+      <input type="text" value={formData.field1} onChange={handleFieldChange} />
+    </div>
+  );
+}
+
+function Step2() {
+  const formData = useSelector(state => state.formData);
+  const dispatch = useDispatch();
+
+  function handleFieldChange(e) {
+    dispatch({
+      type: 'UPDATE_FIELD',
+      payload: {
+        field: 'field2',
+        value: e.target.value
+      }
+    });
+  }
+
+  return (
+    <div>
+      <h2>Step 2</h2>
+      <input type="text" value={formData.field2} onChange={handleFieldChange} />
+    </div>
+  );
+}
+
+function Step3() {
+  const formData = useSelector(state => state.formData);
+  const dispatch = useDispatch();
+
+  function handleFieldChange(e) {
+    dispatch({
+      type: 'UPDATE_FIELD',
+      payload: {
+        field: 'field3',
+        value: e.target.value
+      }
+    });
+  }
+
+  return (
+    <div>
+      <h2>Step 3</h2>
+      <input type="text" value={formData.field3} onChange={handleFieldChange} />
+    </div>
+  );
+}
+Finally, we'll define the wizard component:
+
+javascript
+Copy code
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
+
+function Wizard() {
+  const step = useSelector(state => state.step);
+  const dispatch = useDispatch();
+
+  function handleNextClick() {
+    dispatch({ type: 'NEXT_STEP' });
+  }
+
+  function handlePrevClick() {
+    dispatch({ type: 'PREV_STEP' });
+  }
+
+  function handleSubmit() {
+    dispatch({ type: 'SUBMIT_DATA' });
+  }
+
+  return (
+    <div>
+      {step === 1 && <Step1 />}
+      {step === 2 && <Step2 />}
+      {step === 3 && <Step3 />}
+      <button onClick={handlePrevClick} disabled={step === 1}>
+
+
+
+
+
+
+
 
 
 // Set up LDAP connection
