@@ -1,3 +1,257 @@
+
+Let's call the file store.js:
+
+javascript
+Copy code
+import { configureStore } from '@reduxjs/toolkit';
+import wizardReducer from './reducers/wizard';
+
+export default configureStore({
+  reducer: {
+    wizard: wizardReducer,
+  },
+});
+Next, let's create a separate file for the wizard reducer. Let's call the file wizard.js:
+
+javascript
+Copy code
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  step: 1,
+  fields: {
+    step1Field: '',
+    step2Field: '',
+    step3Field: '',
+  },
+};
+
+const wizardSlice = createSlice({
+  name: 'wizard',
+  initialState,
+  reducers: {
+    goToNextStep(state) {
+      state.step += 1;
+    },
+    goToPreviousStep(state) {
+      state.step -= 1;
+    },
+    setFieldValue(state, action) {
+      const { field, value } = action.payload;
+      state.fields[field] = value;
+    },
+    resetWizard(state) {
+      state.step = 1;
+      state.fields.step1Field = '';
+      state.fields.step2Field = '';
+      state.fields.step3Field = '';
+    },
+  },
+});
+
+export const { goToNextStep, goToPreviousStep, setFieldValue, resetWizard } = wizardSlice.actions;
+
+export default wizardSlice.reducer;
+This reducer stores the current step and the values of the fields in the wizard. It also provides actions for going to the next/previous step, setting a field value, and resetting the wizard state.
+
+Now let's create the components for each step. Let's call the files Step1.js, Step2.js, and Step3.js:
+
+javascript
+Copy code
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { goToNextStep, setFieldValue } from './reducers/wizard';
+
+function Step1() {
+  const dispatch = useDispatch();
+  const step1Field = useSelector((state) => state.wizard.fields.step1Field);
+
+  const handleNextClick = () => {
+    dispatch(goToNextStep());
+  };
+
+  const handleFieldChange = (event) => {
+    const { value } = event.target;
+    dispatch(setFieldValue({ field: 'step1Field', value }));
+  };
+
+  return (
+    <div>
+      <label>
+        Step 1 Field:
+        <input type="text" value={step1Field} onChange={handleFieldChange} />
+      </label>
+      <button onClick={handleNextClick}>Next</button>
+    </div>
+  );
+}
+
+export default Step1;
+javascript
+Copy code
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { goToNextStep, goToPreviousStep, setFieldValue } from './reducers/wizard';
+
+function Step2() {
+  const dispatch = useDispatch();
+  const step2Field = useSelector((state) => state.wizard.fields.step2Field);
+
+  const handleNextClick = () => {
+    dispatch(goToNextStep());
+  };
+
+  const handleBackClick = () => {
+    dispatch(goToPreviousStep());
+  };
+
+  const handleFieldChange = (event) => {
+    const { value } = event.target;
+    dispatch(setFieldValue({ field: 'step2Field', value }));
+  };
+
+  return (
+    <div>
+      <
+
+
+
+webmast01@hotmail.com
+continue
+<label>
+        Step 2 Field:
+        <input type="text" value={step2Field} onChange={handleFieldChange} />
+      </label>
+      <button onClick={handleBackClick}>Back</button>
+      <button onClick={handleNextClick}>Next</button>
+    </div>
+  );
+}
+export default Step2;
+
+csharp
+Copy code
+
+```javascript
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { goToPreviousStep, resetWizard, setFieldValue } from './reducers/wizard';
+
+function Step3() {
+  const dispatch = useDispatch();
+  const step3Field = useSelector((state) => state.wizard.fields.step3Field);
+
+  const handleBackClick = () => {
+    dispatch(goToPreviousStep());
+  };
+
+  const handleFieldChange = (event) => {
+    const { value } = event.target;
+    dispatch(setFieldValue({ field: 'step3Field', value }));
+  };
+
+  const handleSubmitClick = () => {
+    // Submit data to API here
+    // ...
+
+    dispatch(resetWizard());
+  };
+
+  return (
+    <div>
+      <label>
+        Step 3 Field:
+        <input type="text" value={step3Field} onChange={handleFieldChange} />
+      </label>
+      <button onClick={handleBackClick}>Back</button>
+      <button onClick={handleSubmitClick}>Submit</button>
+    </div>
+  );
+}
+
+export default Step3;
+Finally, let's create the wizard component that renders the steps. Let's call the file Wizard.js:
+
+javascript
+Copy code
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
+
+function Wizard() {
+  const step = useSelector((state) => state.wizard.step);
+
+  switch (step) {
+    case 1:
+      return <Step1 />;
+    case 2:
+      return <Step2 />;
+    case 3:
+      return <Step3 />;
+    default:
+      return null;
+  }
+}
+
+export default Wizard;
+That's it! We now have a complete Redux wizard with separate files for the store, reducer, and components for each step. We can use the Wizard component in our app to render the wizard. Note that we'll also need to wrap the Wizard component in a Provider component from the react-redux package to provide the store to the app.
+
+
+
+
+webmast01@hotmail.com
+how to include wizard in react app
+To include the wizard in a React app, we can import the Wizard component and render it in our app. Here's an example of how to do that:
+
+javascript
+Copy code
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from '@reduxjs/toolkit';
+import wizardReducer from './reducers/wizard';
+import Wizard from './Wizard';
+
+const store = createStore(wizardReducer);
+
+function App() {
+  return (
+    <Provider store={store}>
+      <div className="App">
+        <Wizard />
+      </div>
+    </Provider>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { createStore } from 'redux';
 
 const initialState = {
