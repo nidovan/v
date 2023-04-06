@@ -1,4 +1,139 @@
 
+Step 1: Define the Redux store
+
+javascript
+Copy code
+// store.js
+
+import { configureStore } from '@reduxjs/toolkit';
+import wizardReducer from './wizardReducer';
+
+const store = configureStore({
+  reducer: {
+    wizard: wizardReducer,
+  },
+});
+
+export default store;
+Step 2: Define the Wizard reducer
+
+javascript
+Copy code
+// wizardReducer.js
+
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  step1: {
+    field1: '',
+    field2: '',
+  },
+  step2: {
+    field1: '',
+    field2: '',
+  },
+};
+
+const wizardSlice = createSlice({
+  name: 'wizard',
+  initialState,
+  reducers: {
+    setField: (state, action) => {
+      const { step, field, value } = action.payload;
+      state[step][field] = value;
+    },
+    resetWizard: () => initialState,
+  },
+});
+
+export const { setField, resetWizard } = wizardSlice.actions;
+
+export default wizardSlice.reducer;
+Step 3: Create the Wizard component
+
+javascript
+Copy code
+// Wizard.js
+
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setField, resetWizard } from './wizardReducer';
+
+const Wizard = () => {
+  const dispatch = useDispatch();
+  const { step1, step2 } = useSelector((state) => state.wizard);
+
+  const handleInputChange = (event, step, field) => {
+    const value = event.target.value;
+    dispatch(setField({ step, field, value }));
+  };
+
+  const handleReset = () => {
+    dispatch(resetWizard());
+  };
+
+  const handleSubmit = () => {
+    // Submit data to API
+  };
+
+  return (
+    <div>
+      <h2>Step 1</h2>
+      <label>Field 1:</label>
+      <input type="text" value={step1.field1} onChange={(e) => handleInputChange(e, 'step1', 'field1')} />
+      <label>Field 2:</label>
+      <input type="text" value={step1.field2} onChange={(e) => handleInputChange(e, 'step1', 'field2')} />
+
+      <h2>Step 2</h2>
+      <label>Field 1:</label>
+      <input type="text" value={step2.field1} onChange={(e) => handleInputChange(e, 'step2', 'field1')} />
+      <label>Field 2:</label>
+      <input type="text" value={step2.field2} onChange={(e) => handleInputChange(e, 'step2', 'field2')} />
+
+      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  );
+};
+
+export default Wizard;
+Step 4: Render the Wizard component and connect it to the store
+
+javascript
+Copy code
+// index.js
+
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
+import Wizard from './Wizard';
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Wizard />
+    </Provider>
+  );
+};
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Let's call the file store.js:
 
 javascript
