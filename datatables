@@ -1,3 +1,37 @@
+import React, { useEffect } from 'react';
+import { Tooltip } from 'react-bootstrap';
+
+function MyComponent() {
+  useEffect(() => {
+    const tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-toggle="tooltip"]')
+    );
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new window.bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  }, []);
+
+  return (
+    <div>
+      <button
+        data-toggle="tooltip"
+        data-target="#tooltip"
+      >
+        Hover over me
+      </button>
+      <Tooltip id="tooltip">
+        This is a tooltip
+      </Tooltip>
+    </div>
+  );
+}
+
+export default MyComponent;
+
+
+
+
+
 <div class="image-container">
   <img src="example.png" alt="Example Image">
 </div>
