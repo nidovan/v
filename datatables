@@ -1,3 +1,43 @@
+<div class="image-container">
+  <img src="example.png" alt="Example Image">
+</div>
+css
+Copy code
+.image-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+img {
+  opacity: 0;
+  animation-name: fade-in;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+
+
+
+
+
+
+
+
 
 store.js
 
