@@ -1,3 +1,12 @@
+<AsyncSelect
+  options={options}
+  onInputChange={onInputChange}
+  onChange={onChange}
+  getOptionLabel={getOptionLabel}
+  getOptionValue={getOptionValue}
+/>
+
+
 Create a state variable to store the options returned from the API.
 jsx
 Copy code
