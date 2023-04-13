@@ -1,4 +1,36 @@
 import React, { useState } from 'react';
+import AsyncSelect from 'react-select/async';
+
+const MySelect = () => {
+  const [options, setOptions] = useState([]);
+
+  const loadOptions = async (inputValue) => {
+    const response = await fetch(`https://myapi.com/search?q=${inputValue}`);
+    const data = await response.json();
+
+    const uniqueOptions = Array.from(new Set(data)).map((item) => {
+      return { value: item.id, label: item.name };
+    });
+
+    setOptions(uniqueOptions);
+  };
+
+  return (
+    <AsyncSelect
+      cacheOptions
+      defaultOptions
+      loadOptions={loadOptions}
+      options={options}
+    />
+  );
+};
+
+export default MySelect;
+
+
+
+
+import React, { useState } from 'react';
 import { Button, Tooltip } from 'react-bootstrap';
 
 function MyComponent() {
