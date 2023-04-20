@@ -1,50 +1,29 @@
-<AsyncSelect
-  options={options}
-  onInputChange={onInputChange}
-  onChange={onChange}
-  getOptionLabel={getOptionLabel}
-  getOptionValue={getOptionValue}
-/>
+<section class="thankyou-page">
+		<div class="row">
+			<div class="col-md-6 mx-auto">
+				<div class="thankyou-page-inner">
+					<div class="wrapper">
 
+						<!-- tick  -->
+						<div class="tick">
+							<div class="done-tick"></div>
+							<i class="fa-solid fa-check"></i>
+						</div>
+						
+						<!-- thankyou page heading -->
+						<h2>Thankyou For Submission</h2>
 
-Create a state variable to store the options returned from the API.
-jsx
-Copy code
-const [options, setOptions] = useState([]);
-Define an onInputChange function that will be triggered when the user types in the input field. This function should call the API with the current value of the input field and update the state variable with the response.
-jsx
-Copy code
-const onInputChange = async (inputValue) => {
-  const response = await fetch(`API_URL?q=${inputValue}`);
-  const data = await response.json();
-  const uniqueData = removeDuplicates(data);
-  setOptions(uniqueData);
-};
-Define an onChange function that will be triggered when the user selects an option. This function should update the state variable with the selected option.
-jsx
-Copy code
-const onChange = (selectedOption) => {
-  setSelectedOption(selectedOption);
-};
-Define a getOptionLabel function that will be used to display the label of each option in the dropdown.
-jsx
-Copy code
-const getOptionLabel = (option) => option.label;
-Define a getOptionValue function that will be used to get the value of each option when it is selected.
-jsx
-Copy code
-const getOptionValue = (option) => option.value;
-Define a removeDuplicates function that will remove any duplicates from the API response.
-jsx
-Copy code
-const removeDuplicates = (data) => {
-  const uniqueData = [];
-  const map = new Map();
-  for (const item of data) {
-    if (!map.has(item.value)) {
-      map.set(item.value, true);
-      uniqueData.push(item);
-    }
-  }
-  return uniqueData;
-};
+						<!-- thankyou page text -->
+						<p>
+							Don't be afried, Our Telemedical team also give your proper guidline
+						</p>
+
+						<!-- thankyou paeg button -->
+						<div class="next-btn">
+							<button name="next">Back Home</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
