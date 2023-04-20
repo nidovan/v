@@ -1,3 +1,15 @@
+
+services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://your-react-app-domain.com")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
+
 <section class="thankyou-page">
 		<div class="row">
 			<div class="col-md-6 mx-auto">
