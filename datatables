@@ -1,15 +1,22 @@
 
-builder.Services.AddCors(options =>
+public string GetUserEmailById(string userId)
 {
-    options.AddPolicy("AllowAll", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
-});
+    var userPrincipal = new UserPrincipal(new PrincipalContext(ContextType.Domain));
+    userPrincipal.SamAccountName = userId;
 
-app.UseCors("AllowAll");
+    using (var searcher = new PrincipalSearcher(userPrincipal))
+    {
+        var result = searcher.FindOne() as UserPrincipal;
+        if (result != null)
+        {
+            return result.EmailAddress;
+        }
+        else
+        {
+            throw new ArgumentException($"User ID '{userId}' not found in Active Directory.");
+        }
+    }
+}
 
 
 
