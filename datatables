@@ -2,15 +2,12 @@ public class HttpClientFactory : IMsalHttpClientFactory
 {
     private readonly HttpClient _httpClient;
 
-    public HttpClientFactory(string proxyUrl, string proxyUsername, string proxyPassword)
+    public HttpClientFactory()
     {
         var handler = new HttpClientHandler
         {
             UseDefaultCredentials = true,
-            Proxy = new WebProxy(proxyUrl)
-            {
-                Credentials = new NetworkCredential(proxyUsername, proxyPassword)
-            }
+            UseSystemProxy = true,
         };
         _httpClient = new HttpClient(handler);
     }
