@@ -1,4 +1,35 @@
 
+// Set up the proxy settings
+var proxy = new WebProxy("http://proxy-server-url:port");
+proxy.Credentials = new NetworkCredential("username", "password");
+var handler = new HttpClientHandler();
+handler.Proxy = proxy;
+
+// Create a new instance of the MSAL client application
+var app = PublicClientApplicationBuilder.Create("<client-id>")
+                                         .WithAuthority("<authority>")
+                                         .WithRedirectUri("<redirect-uri>")
+                                         .Build();
+
+// Create an instance of the IntegratedWindowsAuthenticationProvider
+var iwaProvider = new IntegratedWindowsAuthenticationProvider(app, scopes);
+
+// Configure the HttpClient to use the HttpClientHandler with the WebProxy
+var httpClient = new HttpClient(handler);
+iwaProvider.HttpClient = httpClient;
+
+// Use the IntegratedWindowsAuthenticationProvider to acquire a token
+var result = await iwaProvider.AcquireTokenAsync("<resource-uri>");
+var accessToken = result.AccessToken;
+
+
+
+
+
+
+
+
+
 public string GetUserEmailById(string userId)
 {
     var userPrincipal = new UserPrincipal(new PrincipalContext(ContextType.Domain));
