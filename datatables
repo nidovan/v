@@ -1,23 +1,25 @@
-var app = PublicClientApplicationBuilder.Create("<client-id>")
-                                         .WithAuthority("<authority>")
-                                         .WithRedirectUri("<redirect-uri>")
-                                         .Build();
-
-var handler = new HttpClientHandler
+public class HttpClientFactory : IMsalHttpClientFactory
 {
-    UseDefaultCredentials = true,
-    Proxy = new WebProxy("<proxy-url>:<proxy-port>")
+    private readonly HttpClient _httpClient;
+
+    public HttpClientFactory(string proxyUrl, string proxyUsername, string proxyPassword)
     {
-        Credentials = new NetworkCredential("<proxy-username>", "<proxy-password>")
+        var handler = new HttpClientHandler
+        {
+            UseDefaultCredentials = true,
+            Proxy = new WebProxy(proxyUrl)
+            {
+                Credentials = new NetworkCredential(proxyUsername, proxyPassword)
+            }
+        };
+        _httpClient = new HttpClient(handler);
     }
-};
-var httpClient = new HttpClient(handler);
 
-var result = await app.AcquireTokenByIntegratedWindowsAuth(scopes)
-                    .WithHttpClient(httpClient)
-                    .ExecuteAsync();
-
-var accessToken = result.AccessToken;
+    public HttpClient GetHttpClient()
+    {
+        return _httpClient;
+    }
+}
 
 
 
