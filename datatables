@@ -1,112 +1,80 @@
-public class HttpClientFactory : IMsalHttpClientFactory
-{
-    private readonly HttpClient _httpClient;
-
-    public HttpClientFactory()
+ public async Task UpdateCommunityName(string accessToken, int communityId, string newCommunityName)
     {
-        var handler = new HttpClientHandler
-        {
-            UseDefaultCredentials = true,
-            UseSystemProxy = true,
-        };
-        _httpClient = new HttpClient(handler);
+        string apiUrl = $"https://www.yammer.com/api/v1/groups/{communityId}.json";
+        string jsonData = $"{{\"name\":\"{newCommunityName}\"}}";
+
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, apiUrl);
+        request.Headers.Add("Authorization", $"Bearer {accessToken}");
+        request.Content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+
+        Console.WriteLine("Community name updated successfully!");
+    }
+    
+    
+    
+    using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+public class YammerApiClient
+{
+    private readonly HttpClient client;
+
+    public YammerApiClient()
+    {
+        client = new HttpClient();
     }
 
-    public HttpClient GetHttpClient()
+    public async Task AddCommunityAdmins(string accessToken, int communityId, List<string> userEmails)
     {
-        return _httpClient;
+        string apiUrl = $"https://www.yammer.com/api/v1/group_memberships.json";
+        string jsonData = $"{{\"group_id\":{communityId},\"user_ids\":[],\"email_addresses\":{GetEmailAddressesJson(userEmails)}}}";
+
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
+        request.Headers.Add("Authorization", $"Bearer {accessToken}");
+        request.Content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+
+        Console.WriteLine("Yammer community administrators added successfully!");
     }
-}
 
-
-
-
-
-
-
-
-public string GetUserEmailById(string userId)
-{
-    var userPrincipal = new UserPrincipal(new PrincipalContext(ContextType.Domain));
-    userPrincipal.SamAccountName = userId;
-
-    using (var searcher = new PrincipalSearcher(userPrincipal))
+    private string GetEmailAddressesJson(List<string> userEmails)
     {
-        var result = searcher.FindOne() as UserPrincipal;
-        if (result != null)
+        StringBuilder sb = new StringBuilder();
+        sb.Append("[");
+        for (int i = 0; i < userEmails.Count; i++)
         {
-            return result.EmailAddress;
+            sb.Append($"\"{userEmails[i]}\"");
+            if (i < userEmails.Count - 1)
+            {
+                sb.Append(",");
+            }
         }
-        else
-        {
-            throw new ArgumentException($"User ID '{userId}' not found in Active Directory.");
-        }
+        sb.Append("]");
+        return sb.ToString();
     }
 }
 
 
 
-{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
-  "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:5000",
-      "sslPort": 0
-    }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-services.AddCors(options =>
-{
-    options.AddDefaultPolicy(builder =>
+public async Task RemoveCommunityAdmin(string accessToken, int communityId, string userEmail)
     {
-        builder.WithOrigins("http://your-react-app-domain.com")
-               .AllowAnyHeader()
-               .AllowAnyMethod();
-    });
-});
+        string apiUrl = $"https://www.yammer.com/api/v1/group_memberships.json?group_id={communityId}&user_email={userEmail}";
+
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, apiUrl);
+        request.Headers.Add("Authorization", $"Bearer {accessToken}");
+
+        HttpResponseMessage response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+
+        Console.WriteLine("Yammer community administrator removed successfully!");
+    }
 
 
-<section class="thankyou-page">
-		<div class="row">
-			<div class="col-md-6 mx-auto">
-				<div class="thankyou-page-inner">
-					<div class="wrapper">
-
-						<!-- tick  -->
-						<div class="tick">
-							<div class="done-tick"></div>
-							<i class="fa-solid fa-check"></i>
-						</div>
-						
-						<!-- thankyou page heading -->
-						<h2>Thankyou For Submission</h2>
-
-						<!-- thankyou page text -->
-						<p>
-							Don't be afried, Our Telemedical team also give your proper guidline
-						</p>
-
-						<!-- thankyou paeg button -->
-						<div class="next-btn">
-							<button name="next">Back Home</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
