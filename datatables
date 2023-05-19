@@ -1,80 +1,15 @@
- public async Task UpdateCommunityName(string accessToken, int communityId, string newCommunityName)
-    {
-        string apiUrl = $"https://www.yammer.com/api/v1/groups/{communityId}.json";
-        string jsonData = $"{{\"name\":\"{newCommunityName}\"}}";
+ string accessToken = "YOUR_ACCESS_TOKEN";
+        int communityId = 12345; // Replace with the actual community ID
+        int userId = 67890; // Replace with the actual user ID
 
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, apiUrl);
-        request.Headers.Add("Authorization", $"Bearer {accessToken}");
-        request.Content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-        HttpResponseMessage response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-
-        Console.WriteLine("Community name updated successfully!");
-    }
-    
-    
-    
-    using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-
-public class YammerApiClient
-{
-    private readonly HttpClient client;
-
-    public YammerApiClient()
-    {
-        client = new HttpClient();
-    }
-
-    public async Task AddCommunityAdmins(string accessToken, int communityId, List<string> userEmails)
-    {
-        string apiUrl = $"https://www.yammer.com/api/v1/group_memberships.json";
-        string jsonData = $"{{\"group_id\":{communityId},\"user_ids\":[],\"email_addresses\":{GetEmailAddressesJson(userEmails)}}}";
-
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
-        request.Headers.Add("Authorization", $"Bearer {accessToken}");
-        request.Content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-        HttpResponseMessage response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-
-        Console.WriteLine("Yammer community administrators added successfully!");
-    }
-
-    private string GetEmailAddressesJson(List<string> userEmails)
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.Append("[");
-        for (int i = 0; i < userEmails.Count; i++)
+        using (HttpClient client = new HttpClient())
         {
-            sb.Append($"\"{userEmails[i]}\"");
-            if (i < userEmails.Count - 1)
-            {
-                sb.Append(",");
-            }
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+
+            string apiUrl = $"https://www.yammer.com/api/v1/community_memberships.json?community_id={communityId}&user_id={userId}&is_admin=true";
+
+            HttpResponseMessage response = await client.PostAsync(apiUrl, new StringContent(""));
+            response.EnsureSuccessStatusCode();
+
+            Console.WriteLine("User added as admin successfully.");
         }
-        sb.Append("]");
-        return sb.ToString();
-    }
-}
-
-
-
-public async Task RemoveCommunityAdmin(string accessToken, int communityId, string userEmail)
-    {
-        string apiUrl = $"https://www.yammer.com/api/v1/group_memberships.json?group_id={communityId}&user_email={userEmail}";
-
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, apiUrl);
-        request.Headers.Add("Authorization", $"Bearer {accessToken}");
-
-        HttpResponseMessage response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-
-        Console.WriteLine("Yammer community administrator removed successfully!");
-    }
-
-
