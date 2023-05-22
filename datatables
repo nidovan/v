@@ -1,1 +1,20 @@
+public async Task RemoveUserFromCommunity(string accessToken, int communityId, int userId)
+{
+    using (HttpClient client = new HttpClient())
+    {
+        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
 
+        string url = $"https://www.yammer.com/api/v1/community_memberships/{communityId}.json?user_id={userId}";
+
+        HttpResponseMessage response = await client.DeleteAsync(url);
+        if (response.IsSuccessStatusCode)
+        {
+            Console.WriteLine("User removed from the community.");
+        }
+        else
+        {
+            // Error occurred
+            Console.WriteLine("Error removing user from the community.");
+        }
+    }
+}
