@@ -33,3 +33,64 @@ string ldapPath = "LDAP://YourLDAPServerAddress"; // Replace this with your LDAP
                 ouProperties.AppendLine(); // Add a separator between OUs
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+ try
+        {
+            string ldapServer = "example.com";
+            int ldapPort = 389;
+            string baseDN = "ou=Divisions,ou=Data,o=m";
+            string filter = "(divisioncode=*)"; // Modify the filter as needed
+            string[] attributesToReturn = { "divisioncode", "description" }; // Adjust the attributes you want to retrieve
+
+            LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier(ldapServer, ldapPort);
+            LdapConnection connection = new LdapConnection(identifier);
+
+            connection.AuthType = AuthType.Negotiate; // Using GSSAPI
+
+            connection.Bind(); // Anonymous bind - Adjust this according to your authentication requirements
+
+            SearchRequest searchRequest = new SearchRequest(
+                baseDN,
+                filter,
+                SearchScope.Subtree,
+                attributesToReturn
+            );
+
+            SearchResponse searchResponse = (SearchResponse)connection.SendRequest(searchRequest);
+
+            if (searchResponse.Entries.Count > 0)
+            {
+                foreach (SearchResultEntry entry in searchResponse.Entries)
+                {
+                    Console.WriteLine("Entry:");
+                    foreach (string attributeName in entry.Attributes.AttributeNames)
+                    {
+                        Console.WriteLine($"{attributeName}: {entry.Attributes[attributeName][0]}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No entries found.");
+            }
+
+            connection.Dispose();
+        }
+        catch (LdapException ldapEx)
+        {
+            Console.WriteLine($"LDAP Exception: {ldapEx.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
