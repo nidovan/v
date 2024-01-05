@@ -94,3 +94,50 @@ string ldapPath = "LDAP://YourLDAPServerAddress"; // Replace this with your LDAP
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
+
+
+
+
+
+
+ string ldapServer = "ldap://your-ldap-server:port"; // Replace with your LDAP server details
+        string username = "username"; // Replace with your LDAP username
+        string password = "password"; // Replace with your LDAP password
+        string searchBase = "ou=divisions,ou=data"; // Replace with your search base DN
+
+        try
+        {
+            LdapConnection ldapConnection = new LdapConnection(ldapServer);
+            ldapConnection.AuthType = AuthType.Basic;
+            ldapConnection.SessionOptions.ProtocolVersion = 3; // Use LDAP v3
+            ldapConnection.Credential = new System.Net.NetworkCredential(username, password);
+            ldapConnection.Bind();
+
+            SearchRequest searchRequest = new SearchRequest(
+                searchBase,
+                "(&(objectClass=*))", // Replace this filter as per your search requirements
+                SearchScope.Subtree // You can change the scope of the search as needed
+            );
+
+            SearchResponse searchResponse = (SearchResponse)ldapConnection.SendRequest(searchRequest);
+
+            foreach (SearchResultEntry entry in searchResponse.Entries)
+            {
+                Console.WriteLine("DN: " + entry.DistinguishedName);
+                foreach (string attributeName in entry.Attributes.AttributeNames)
+                {
+                    Console.WriteLine(attributeName + ": " + entry.Attributes[attributeName][0]);
+                }
+                Console.WriteLine("----------------------------------");
+            }
+
+            ldapConnection.Dispose();
+        }
+        catch (LdapException e)
+        {
+            Console.WriteLine("LDAP Exception: " + e.Message);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e.Message);
+        }
