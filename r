@@ -1,143 +1,63 @@
-string ldapPath = "LDAP://YourLDAPServerAddress"; // Replace this with your LDAP server address
-        string baseDN = "DC=example,DC=com"; // Replace this with your base distinguished name
+public async Task<Community?> CreateCommunity(string displayName, string description)
+  {
+    _ = _graphServiceClient ??
+        throw new System.NullReferenceException("Graph has not been initialized");
 
-        DirectoryEntry entry = new DirectoryEntry(ldapPath);
-        DirectorySearcher searcher = new DirectorySearcher(entry);
+    var community = new Community
+    {
+      DisplayName = displayName,
+      Description = description,
+      Privacy = CommunityPrivacy.Public
+    };
 
-        searcher.Filter = "(objectCategory=organizationalUnit)";
-        searcher.SearchScope = SearchScope.Subtree;
-        searcher.PropertiesToLoad.Add("*"); // Load all properties
+    // Create community is asynchronous and returns 202 + location header for the long running operation.
+    // To access this we need to use a NativeResponseHandler.
+    var nativeResponseHandler = new NativeResponseHandler();
+    await _graphServiceClient.EmployeeExperience.Communities.PostAsync(community, requestConfiguration => requestConfiguration.Options.Add(new ResponseHandlerOption() { ResponseHandler = nativeResponseHandler }));
+    using var responseMessage = nativeResponseHandler.Value as HttpResponseMessage;
+    if (responseMessage == null || responseMessage?.StatusCode != System.Net.HttpStatusCode.Accepted)
+    {
+      throw new Exception($"Failed to create community. Status code: {responseMessage?.StatusCode}");
+    }
 
-        StringBuilder ouProperties = new StringBuilder();
+    // Not sure if there is a better way to pass a resource URL to the client.
+    // For now just parse the operation id from the URL.
+    var location = responseMessage?.Headers.Location!.ToString();
+    var startPos = location.IndexOf("('") + "('".Length;
+    var length = location.IndexOf("')") - startPos;
+    var operationId = location.Substring(startPos, length);
 
-        try
-        {
-            SearchResultCollection results = searcher.FindAll();
+    // Now we need to poll the long running operation for status updates.
+    string? communityId = null;
+    var retryCount = 0;
+    while (communityId == null && retryCount <= 5)
+    {
+      retryCount++;
+      await Task.Delay(5000);
+      
+      var operation = await _graphServiceClient.EmployeeExperience.EngagementAsyncOperations[operationId].GetAsync();
+      if (operation == null)
+      {
+        continue;
+      }
 
-            foreach (SearchResult result in results)
-            {
-                DirectoryEntry entryFound = result.GetDirectoryEntry();
+      if (operation.Status.Value == LongRunningOperationStatus.Failed)
+      {
+        throw new Exception($"Failed to create community: {operation.StatusDetail}");
+      }
 
-                // Append OU name
-                ouProperties.AppendLine($"OU Name: {entryFound.Name}");
+      if (operation.Status.Value == LongRunningOperationStatus.Succeeded)
+      {
+        communityId = operation.ResourceId;
+        break;
+      }
+    }
 
-                // Append properties
-                foreach (string propertyName in entryFound.Properties.PropertyNames)
-                {
-                    ouProperties.AppendLine($"{propertyName}:");
-                    foreach (object propertyValue in entryFound.Properties[propertyName])
-                    {
-                        ouProperties.AppendLine($"- {propertyValue}");
-                    }
-                }
-                ouProperties.AppendLine(); // Add a separator between OUs
-            }
-        }
+    if (communityId == null)
+    {
+      throw new Exception($"Failed to create community. Operation timed out.");
+    }
 
-
-
-
-
-
-
-
-
-
-
- try
-        {
-            string ldapServer = "example.com";
-            int ldapPort = 389;
-            string baseDN = "ou=Divisions,ou=Data,o=m";
-            string filter = "(divisioncode=*)"; // Modify the filter as needed
-            string[] attributesToReturn = { "divisioncode", "description" }; // Adjust the attributes you want to retrieve
-
-            LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier(ldapServer, ldapPort);
-            LdapConnection connection = new LdapConnection(identifier);
-
-            connection.AuthType = AuthType.Negotiate; // Using GSSAPI
-
-            connection.Bind(); // Anonymous bind - Adjust this according to your authentication requirements
-
-            SearchRequest searchRequest = new SearchRequest(
-                baseDN,
-                filter,
-                SearchScope.Subtree,
-                attributesToReturn
-            );
-
-            SearchResponse searchResponse = (SearchResponse)connection.SendRequest(searchRequest);
-
-            if (searchResponse.Entries.Count > 0)
-            {
-                foreach (SearchResultEntry entry in searchResponse.Entries)
-                {
-                    Console.WriteLine("Entry:");
-                    foreach (string attributeName in entry.Attributes.AttributeNames)
-                    {
-                        Console.WriteLine($"{attributeName}: {entry.Attributes[attributeName][0]}");
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("No entries found.");
-            }
-
-            connection.Dispose();
-        }
-        catch (LdapException ldapEx)
-        {
-            Console.WriteLine($"LDAP Exception: {ldapEx.Message}");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred: {ex.Message}");
-        }
-
-
-
-
-
-
- string ldapServer = "ldap://your-ldap-server:port"; // Replace with your LDAP server details
-        string username = "username"; // Replace with your LDAP username
-        string password = "password"; // Replace with your LDAP password
-        string searchBase = "ou=divisions,ou=data"; // Replace with your search base DN
-
-        try
-        {
-            LdapConnection ldapConnection = new LdapConnection(ldapServer);
-            ldapConnection.AuthType = AuthType.Basic;
-            ldapConnection.SessionOptions.ProtocolVersion = 3; // Use LDAP v3
-            ldapConnection.Credential = new System.Net.NetworkCredential(username, password);
-            ldapConnection.Bind();
-
-            SearchRequest searchRequest = new SearchRequest(
-                searchBase,
-                "(&(objectClass=*))", // Replace this filter as per your search requirements
-                SearchScope.Subtree // You can change the scope of the search as needed
-            );
-
-            SearchResponse searchResponse = (SearchResponse)ldapConnection.SendRequest(searchRequest);
-
-            foreach (SearchResultEntry entry in searchResponse.Entries)
-            {
-                Console.WriteLine("DN: " + entry.DistinguishedName);
-                foreach (string attributeName in entry.Attributes.AttributeNames)
-                {
-                    Console.WriteLine(attributeName + ": " + entry.Attributes[attributeName][0]);
-                }
-                Console.WriteLine("----------------------------------");
-            }
-
-            ldapConnection.Dispose();
-        }
-        catch (LdapException e)
-        {
-            Console.WriteLine("LDAP Exception: " + e.Message);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Exception: " + e.Message);
-        }
+    // Now we have the community id, we can fetch the created community.
+    return await _graphServiceClient.EmployeeExperience.Communities[communityId].GetAsync();
+  }
