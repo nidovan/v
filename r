@@ -1,4 +1,44 @@
 
+ string graphApiEndpoint = "https://graph.microsoft.com/beta/entity";
+
+        // JSON payload for the POST request
+        string jsonPayload = "{\"property1\": \"value1\", \"property2\": \"value2\"}";
+
+        using (var httpClient = new HttpClient())
+        {
+            // Add authorization header with Bearer token
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            // Set content type
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // Create the HTTP request content
+            var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+            // Send the POST request
+            var response = await httpClient.PostAsync(graphApiEndpoint, content);
+
+            // Check if the request was successful
+            if (response.IsSuccessStatusCode)
+            {
+                // Read and display the response content
+                string responseContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("Response: " + responseContent);
+            }
+            else
+            {
+                // Display error message
+                Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+            }
+        }
+
+
+
+
+
+
+
+
  // Set the version to beta
     var graphApiVersion = "beta"; // 'beta' or 'v1.0'
     
