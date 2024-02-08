@@ -1,3 +1,47 @@
+
+ // Set the version to beta
+    var graphApiVersion = "beta"; // 'beta' or 'v1.0'
+    
+    // Set the endpoint and the action we want to execute
+    var endpoint = $"https://graph.microsoft.com/{graphApiVersion}";
+    var action = "/applications";
+
+    // Create the http client
+    using (var client = new HttpClient())
+    using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint + action))
+    {
+        // Set the headers including the authorization bearer header
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+        // Sending the request which actually is a http get
+        using (var response = await client.SendAsync(request))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                // Read the result as string, since the response will be json
+                var result = await response.Content.ReadAsStringAsync();
+                // Do something with the result
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public async Task<Community?> CreateCommunity(string displayName, string description)
   {
     _ = _graphServiceClient ??
