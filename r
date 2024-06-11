@@ -1,147 +1,68 @@
+import React, { useState, useEffect } from 'react';
+import { AgGridReact } from 'ag-grid-react';
+import { useParams } from 'react-router-dom';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
 
- string graphApiEndpoint = "https://graph.microsoft.com/beta/entity";
+const GridComponent = () => {
+  const [rowData, setRowData] = useState([]);
+  const { id } = useParams();
 
-        // JSON payload for the POST request
-        string jsonPayload = "{\"property1\": \"value1\", \"property2\": \"value2\"}";
-
-        using (var httpClient = new HttpClient())
-        {
-            // Add authorization header with Bearer token
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-            // Set content type
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            // Create the HTTP request content
-            var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-
-            // Send the POST request
-            var response = await httpClient.PostAsync(graphApiEndpoint, content);
-
-            // Check if the request was successful
-            if (response.IsSuccessStatusCode)
-            {
-                // Read and display the response content
-                string responseContent = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("Response: " + responseContent);
-            }
-            else
-            {
-                // Display error message
-                Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
-            }
-        }
-
-
-
-
-
-
-
-
- // Set the version to beta
-    var graphApiVersion = "beta"; // 'beta' or 'v1.0'
-    
-    // Set the endpoint and the action we want to execute
-    var endpoint = $"https://graph.microsoft.com/{graphApiVersion}";
-    var action = "/applications";
-
-    // Create the http client
-    using (var client = new HttpClient())
-    using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint + action))
-    {
-        // Set the headers including the authorization bearer header
-        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-        // Sending the request which actually is a http get
-        using (var response = await client.SendAsync(request))
-        {
-            if (response.IsSuccessStatusCode)
-            {
-                // Read the result as string, since the response will be json
-                var result = await response.Content.ReadAsStringAsync();
-                // Do something with the result
-            }
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-public async Task<Community?> CreateCommunity(string displayName, string description)
-  {
-    _ = _graphServiceClient ??
-        throw new System.NullReferenceException("Graph has not been initialized");
-
-    var community = new Community
-    {
-      DisplayName = displayName,
-      Description = description,
-      Privacy = CommunityPrivacy.Public
+  useEffect(() => {
+    // Static data based on the ID parameter
+    const staticData = {
+      1: [
+        { id: 1, name: 'John Doe', description: 'Software Engineer' },
+        { id: 2, name: 'Jane Smith', description: 'Graphic Designer' },
+      ],
+      2: [
+        { id: 3, name: 'Alice Johnson', description: 'Product Manager' },
+        { id: 4, name: 'Bob Brown', description: 'Data Scientist' },
+      ],
+      // Add more static data sets as needed
     };
 
-    // Create community is asynchronous and returns 202 + location header for the long running operation.
-    // To access this we need to use a NativeResponseHandler.
-    var nativeResponseHandler = new NativeResponseHandler();
-    await _graphServiceClient.EmployeeExperience.Communities.PostAsync(community, requestConfiguration => requestConfiguration.Options.Add(new ResponseHandlerOption() { ResponseHandler = nativeResponseHandler }));
-    using var responseMessage = nativeResponseHandler.Value as HttpResponseMessage;
-    if (responseMessage == null || responseMessage?.StatusCode != System.Net.HttpStatusCode.Accepted)
-    {
-      throw new Exception($"Failed to create community. Status code: {responseMessage?.StatusCode}");
-    }
+    setRowData(staticData[id] || []);
+  }, [id]);
 
-    // Not sure if there is a better way to pass a resource URL to the client.
-    // For now just parse the operation id from the URL.
-    var location = responseMessage?.Headers.Location!.ToString();
-    var startPos = location.IndexOf("('") + "('".Length;
-    var length = location.IndexOf("')") - startPos;
-    var operationId = location.Substring(startPos, length);
+  const columnDefs = [
+    { headerName: 'ID', field: 'id' },
+    { headerName: 'Name', field: 'name' },
+    { headerName: 'Description', field: 'description' },
+    // Add more column definitions as needed
+  ];
 
-    // Now we need to poll the long running operation for status updates.
-    string? communityId = null;
-    var retryCount = 0;
-    while (communityId == null && retryCount <= 5)
-    {
-      retryCount++;
-      await Task.Delay(5000);
-      
-      var operation = await _graphServiceClient.EmployeeExperience.EngagementAsyncOperations[operationId].GetAsync();
-      if (operation == null)
-      {
-        continue;
-      }
+  return (
+    <div className="ag-theme-alpine" style={{ height: '500px', width: '100%' }}>
+      <AgGridReact
+        columnDefs={columnDefs}
+        rowData={rowData}
+        pagination={true}
+        paginationPageSize={10}
+      />
+    </div>
+  );
+};
 
-      if (operation.Status.Value == LongRunningOperationStatus.Failed)
-      {
-        throw new Exception($"Failed to create community: {operation.StatusDetail}");
-      }
+export default GridComponent;
+This component now uses static data based on the id parameter from the URL.
 
-      if (operation.Status.Value == LongRunningOperationStatus.Succeeded)
-      {
-        communityId = operation.ResourceId;
-        break;
-      }
-    }
+Here is the complete setup for your App component:
 
-    if (communityId == null)
-    {
-      throw new Exception($"Failed to create community. Operation timed out.");
-    }
+jsx
+Copy code
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import GridComponent from './GridComponent';
 
-    // Now we have the community id, we can fetch the created community.
-    return await _graphServiceClient.EmployeeExperience.Communities[communityId].GetAsync();
-  }
+const App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/grid/:id" component={GridComponent} />
+      </Switch>
+    </Router>
+  );
+};
+
+export default App;
