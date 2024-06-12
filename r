@@ -1,4 +1,28 @@
-const onFilterTextBoxChanged = (event) => {
+import React, { useState, useEffect, useRef } from 'react';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+const GridExample = () => {
+  const gridRef = useRef(null);
+  const [rowData, setRowData] = useState([]);
+  const [columnDefs] = useState([
+    { headerName: "Make", field: "make", filter: true, sortable: true, rowGroup: true },
+    { headerName: "Model", field: "model", filter: true, sortable: true },
+    { headerName: "Price", field: "price", filter: true, sortable: true }
+  ]);
+
+  useEffect(() => {
+    fetch('https://www.ag-grid.com/example-assets/row-data.json')
+      .then(result => result.json())
+      .then(rowData => setRowData(rowData));
+  }, []);
+
+  const onExportClick = () => {
+    gridRef.current.api.exportDataAsCsv();
+  };
+
+  const onFilterTextBoxChanged = (event) => {
     gridRef.current.api.setQuickFilter(event.target.value);
   };
 
@@ -21,3 +45,7 @@ const onFilterTextBoxChanged = (event) => {
         </AgGridReact>
       </div>
     </div>
+  );
+};
+
+export default GridExample;
