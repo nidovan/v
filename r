@@ -22,23 +22,28 @@ const useStyles = makeStyles({
         fontSize: '20px',
         fontWeight: 'bold',
         marginLeft: '10px',
-        marginRight: '20px', // Adjust as needed for spacing between name and separator
     },
     separator: {
         height: '24px',
         width: '1px',
         backgroundColor: '#e1e1e1',
         marginLeft: '20px', // Adjust as needed
-        marginRight: '20px', // Adjust as needed
     },
     navItems: {
         display: 'flex',
         alignItems: 'center',
         gap: '15px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     rightItems: {
         display: 'flex',
         alignItems: 'center',
+    },
+    leftItems: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '15px',
     },
 });
 
@@ -53,30 +58,32 @@ const TopNavigation = () => {
                 <div className={classes.separator}></div>
             </div>
             <div className={classes.navItems}>
-                <Menu>
-                    <MenuTrigger>
-                        <Button appearance="subtle">About Us</Button>
-                    </MenuTrigger>
-                    <MenuPopover>
-                        <MenuList>
-                            <MenuItem>Our Story</MenuItem>
-                            <MenuItem>Team</MenuItem>
-                            <MenuItem>Careers</MenuItem>
-                        </MenuList>
-                    </MenuPopover>
-                </Menu>
-                <Menu>
-                    <MenuTrigger>
-                        <Button appearance="subtle">Contact Us</Button>
-                    </MenuTrigger>
-                    <MenuPopover>
-                        <MenuList>
-                            <MenuItem>Email</MenuItem>
-                            <MenuItem>Phone</MenuItem>
-                            <MenuItem>Locations</MenuItem>
-                        </MenuList>
-                    </MenuPopover>
-                </Menu>
+                <div className={classes.leftItems}>
+                    <Menu>
+                        <MenuTrigger>
+                            <Button appearance="subtle">About Us</Button>
+                        </MenuTrigger>
+                        <MenuPopover>
+                            <MenuList>
+                                <MenuItem>Our Story</MenuItem>
+                                <MenuItem>Team</MenuItem>
+                                <MenuItem>Careers</MenuItem>
+                            </MenuList>
+                        </MenuPopover>
+                    </Menu>
+                    <Menu>
+                        <MenuTrigger>
+                            <Button appearance="subtle">Contact Us</Button>
+                        </MenuTrigger>
+                        <MenuPopover>
+                            <MenuList>
+                                <MenuItem>Email</MenuItem>
+                                <MenuItem>Phone</MenuItem>
+                                <MenuItem>Locations</MenuItem>
+                            </MenuList>
+                        </MenuPopover>
+                    </Menu>
+                </div>
             </div>
             <div className={classes.rightItems}>
                 <Menu>
