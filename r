@@ -21,6 +21,15 @@ const useStyles = makeStyles({
     appName: {
         fontSize: '20px',
         fontWeight: 'bold',
+        marginLeft: '10px',
+        marginRight: '20px', // Adjust as needed for spacing between name and separator
+    },
+    separator: {
+        height: '24px',
+        width: '1px',
+        backgroundColor: '#e1e1e1',
+        marginLeft: '20px', // Adjust as needed
+        marginRight: '20px', // Adjust as needed
     },
     navItems: {
         display: 'flex',
@@ -41,6 +50,7 @@ const TopNavigation = () => {
             <div className={classes.logoContainer}>
                 <img src="path-to-your-logo.png" alt="Logo" className={classes.logo} />
                 <span className={classes.appName}>Your App Name</span>
+                <div className={classes.separator}></div>
             </div>
             <div className={classes.navItems}>
                 <Menu>
