@@ -1,24 +1,33 @@
-import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger, Button, Toolbar, ToolbarButton } from '@fluentui/react-components';
+// TopNavigation.js
+import React from 'react';
+import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger, Button, Avatar, Toolbar, ToolbarItem } from '@fluentui/react-components';
 
 const TopNavigation = () => {
     return (
         <Toolbar>
-            <ToolbarButton>
+            <ToolbarItem>
+                <Button>About Us</Button>
+            </ToolbarItem>
+            <ToolbarItem>
+                <Button>Contact Us</Button>
+            </ToolbarItem>
+            <div style={{ flexGrow: 1 }}></div>
+            <ToolbarItem>
                 <Menu>
                     <MenuTrigger>
-                        <Button>Menu</Button>
+                        <Button>
+                            <Avatar name="User Name" />
+                        </Button>
                     </MenuTrigger>
                     <MenuPopover>
                         <MenuList>
-                            <MenuItem>Home</MenuItem>
-                            <MenuItem>About</MenuItem>
-                            <MenuItem>Services</MenuItem>
-                            <MenuItem>Contact</MenuItem>
+                            <MenuItem>Profile</MenuItem>
+                            <MenuItem>Settings</MenuItem>
+                            <MenuItem>Logout</MenuItem>
                         </MenuList>
                     </MenuPopover>
                 </Menu>
-            </ToolbarButton>
-            {/* Add more buttons or elements as needed */}
+            </ToolbarItem>
         </Toolbar>
     );
 };
